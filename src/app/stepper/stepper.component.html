@@ -1,6 +1,6 @@
 <mat-horizontal-stepper linear #stepper>
   <mat-step [stepControl]="firstFormGroup">
-    <form class="firstForm" [formGroup]="firstFormGroup">
+    <form [formGroup]="firstFormGroup">
       <ng-template matStepLabel>
         <h3>Create Account</h3>
         <p>Glad to see you here!</p>
@@ -49,19 +49,38 @@
             <h3>Update Profile Picture</h3>
             <p>We wanna know you more!</p>
         </ng-template>
-        TODO
+        <mat-form-field>
+            <input matInput required placeholder="File" formControlName="fileCtrl">
+            <mat-error *ngIf="thirdFormGroup.get('fileCtrl').hasError('required')">Required</mat-error>
+        </mat-form-field>
         <div>
           <button mat-raised-button color="primary" matStepperNext>SUBMIT & NEXT</button>
           <button mat-button matStepperPrevious>Back</button>
         </div>
       </form>
-    </mat-step>
+  </mat-step>
+  <mat-step [stepControl]="fourFormGroup">
+      <form [formGroup]="fourFormGroup">
+        <ng-template matStepLabel>
+            <h3>Payment Method</h3>
+            <p>Add your credit card infomation! </p>
+        </ng-template>
+        <mat-form-field>
+            <input matInput required placeholder="Card Name" formControlName="cardnameCtrl">
+            <mat-error *ngIf="fourFormGroup.get('cardnameCtrl').hasError('required')">Required</mat-error>
+        </mat-form-field>
+        <div>
+          <button mat-raised-button color="primary" matStepperNext>DONE</button>
+          <button mat-button matStepperPrevious>Back</button>
+        </div>
+      </form>
+  </mat-step>
   <mat-step>
-    <ng-template matStepLabel>Done</ng-template>
-    You are now done.
-    <div>
-      <button mat-button matStepperPrevious>Back</button>
-      <button mat-button (click)="stepper.reset()">Reset</button>
-    </div>
+    <ng-template matStepLabel>
+        <h3>Congratulations</h3>
+        <p>Now you’re one of us! </p>
+    </ng-template>
+    <mat-icon style="font-size: 14em;left: 40%;position: relative;">sentiment_very_satisfied</mat-icon>
+    <p style="text-align: center;">Redirected to homepage after 5 seconds…</p>
   </mat-step>
 </mat-horizontal-stepper>

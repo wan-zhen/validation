@@ -1,4 +1,9 @@
-.firstForm mat-form-field{
+mat-form-field {
   display: block;
+  margin: 0 auto;
   width: 50%;
+}
+
+form {
+  text-align: center;
 }

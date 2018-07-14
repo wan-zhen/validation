@@ -11,6 +11,7 @@ export class StepperComponent implements OnInit {
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
   thirdFormGroup: FormGroup;
+  fourFormGroup: FormGroup;
   constructor() {}
 
   ngOnInit() {
@@ -22,6 +23,12 @@ export class StepperComponent implements OnInit {
     this.secondFormGroup =  new FormGroup({
       nameCtrl: new FormControl(''),
       phoneCtrl: new FormControl('', [Validators.required])
+    });
+    this.thirdFormGroup =  new FormGroup({
+      fileCtrl: new FormControl('', [Validators.required])
+    });
+    this.fourFormGroup =  new FormGroup({
+      cardnameCtrl: new FormControl('', [Validators.required])
     });
   }
 }
