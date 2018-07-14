@@ -43,6 +43,19 @@
       </div>
     </form>
   </mat-step>
+  <mat-step [stepControl]="thirdFormGroup">
+      <form [formGroup]="thirdFormGroup">
+        <ng-template matStepLabel>
+            <h3>Update Profile Picture</h3>
+            <p>We wanna know you more!</p>
+        </ng-template>
+        TODO
+        <div>
+          <button mat-raised-button color="primary" matStepperNext>SUBMIT & NEXT</button>
+          <button mat-button matStepperPrevious>Back</button>
+        </div>
+      </form>
+    </mat-step>
   <mat-step>
     <ng-template matStepLabel>Done</ng-template>
     You are now done.
