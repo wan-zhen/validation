@@ -1,28 +1,45 @@
-<button mat-raised-button (click)="isOptional = !isOptional">
-  {{!isOptional ? 'Enable optional steps' : 'Disable optional steps'}}
-</button>
-
 <mat-horizontal-stepper linear #stepper>
   <mat-step [stepControl]="firstFormGroup">
-    <form [formGroup]="firstFormGroup">
-      <ng-template matStepLabel>Fill out your name</ng-template>
+    <form class="firstForm" [formGroup]="firstFormGroup">
+      <ng-template matStepLabel>
+        <h3>Create Account</h3>
+        <p>Glad to see you here!</p>
+      </ng-template>
       <mat-form-field>
-        <input matInput placeholder="Last name, First name" formControlName="firstCtrl" required>
+        <input matInput type="email" placeholder="Account" formControlName="accountCtrl" required>
+        <mat-error *ngIf="firstFormGroup.get('accountCtrl').hasError('required')">Required</mat-error>
+        <mat-error *ngIf="firstFormGroup.get('accountCtrl').hasError('email')">INVALID EMAIL</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+          <input matInput type="password" placeholder="Password" minlength="8" formControlName="passwordCtrl" required>
+          <mat-error *ngIf="firstFormGroup.get('passwordCtrl').hasError('minlength')">MINIMUM 8 CHARACTERS</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+          <input matInput type="password" placeholder="Comfirm Password" minlength="8" formControlName="confirmPasswordCtrl" required>
+          <mat-error *ngIf="firstFormGroup.get('confirmPasswordCtrl').hasError('minlength')">MINIMUM 8 CHARACTERS</mat-error>
+          <mat-error *ngIf="firstFormGroup.get('passwordCtrl').value !== firstFormGroup.get('confirmPasswordCtrl').value">NOT MATCH</mat-error>
       </mat-form-field>
       <div>
-        <button mat-button matStepperNext>Next</button>
+        <button mat-raised-button color="primary" matStepperNext>SUBMIT & NEXT</button>
       </div>
     </form>
   </mat-step>
-  <mat-step [stepControl]="secondFormGroup" [optional]="isOptional">
+  <mat-step [stepControl]="secondFormGroup">
     <form [formGroup]="secondFormGroup">
-      <ng-template matStepLabel>Fill out your address</ng-template>
+      <ng-template matStepLabel>
+          <h3>General Infomation</h3>
+          <p>Tell us who you are!</p>
+      </ng-template>
       <mat-form-field>
-        <input matInput placeholder="Address" formControlName="secondCtrl" required>
+        <input matInput placeholder="Name (optional)" formControlName="nameCtrl">
+      </mat-form-field>
+      <mat-form-field>
+          <input matInput required placeholder="Phone" formControlName="phoneCtrl">
+          <mat-error *ngIf="secondFormGroup.get('phoneCtrl').hasError('required')">Required</mat-error>
       </mat-form-field>
       <div>
+        <button mat-raised-button color="primary" matStepperNext>SUBMIT & NEXT</button>
         <button mat-button matStepperPrevious>Back</button>
-        <button mat-button matStepperNext>Next</button>
       </div>
     </form>
   </mat-step>

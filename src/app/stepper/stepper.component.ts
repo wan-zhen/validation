@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, FormGroup, Validators, FormControl} from '@angular/forms';
 
 @Component({
   selector: 'app-stepper',
@@ -10,15 +10,17 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 export class StepperComponent implements OnInit {
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
-  isOptional = false;
   constructor(private _formBuilder: FormBuilder) {}
 
   ngOnInit() {
-    this.firstFormGroup = this._formBuilder.group({
-      firstCtrl: ['', Validators.required]
+    this.firstFormGroup =  new FormGroup({
+      accountCtrl: new FormControl('', [Validators.required, Validators.email]),
+      passwordCtrl: new FormControl('', [Validators.required, Validators.minLength(8)]),
+      confirmPasswordCtrl: new FormControl('', [Validators.required, Validators.minLength(8)])
     });
-    this.secondFormGroup = this._formBuilder.group({
-      secondCtrl: ''
+    this.secondFormGroup =  new FormGroup({
+      nameCtrl: new FormControl(''),
+      phoneCtrl: new FormControl('', [Validators.required]),
     });
   }
 
